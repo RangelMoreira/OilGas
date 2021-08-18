@@ -3,6 +3,8 @@ package com.halliburton.halliburtonsystem.dto;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.halliburton.halliburtonsystem.entities.Embark;
+
 public class EmbarkDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -10,15 +12,26 @@ public class EmbarkDTO implements Serializable{
 	private Instant begin;
 	private Instant end;
 	
+	private EmployeeDTO employee;
+	
 	public EmbarkDTO() {
 		
 	}
-	
-	public EmbarkDTO(Long id, Instant begin, Instant end) {
+
+	public EmbarkDTO(Long id, Instant begin, Instant end, EmployeeDTO employee) {
 		super();
 		this.id = id;
 		this.begin = begin;
 		this.end = end;
+		this.employee = employee;
+	}
+	
+	public EmbarkDTO(Embark entity) {
+		super();
+		id = entity.getId();
+		begin = entity.getBegin();
+		end = entity.getEnd();
+		employee = new EmployeeDTO(entity.getEmployee());
 	}
 
 	public Long getId() {
@@ -43,6 +56,14 @@ public class EmbarkDTO implements Serializable{
 
 	public void setEnd(Instant end) {
 		this.end = end;
+	}
+
+	public EmployeeDTO getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(EmployeeDTO employee) {
+		this.employee = employee;
 	}
 
 	@Override
