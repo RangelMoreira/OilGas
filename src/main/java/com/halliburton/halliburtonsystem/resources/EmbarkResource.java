@@ -21,7 +21,7 @@ public class EmbarkResource {
 	private EmbarkService service;
 	
 	@PostMapping
-	public ResponseEntity<EmbarkDTO> insert(@RequestBody EmbarkDTO dto) {
+	public ResponseEntity<EmbarkDTO> insert(@RequestBody EmbarkDTO dto) throws Exception {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 
