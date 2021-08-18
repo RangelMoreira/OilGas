@@ -2,6 +2,8 @@ package com.halliburton.halliburtonsystem.dto;
 
 import java.io.Serializable;
 
+import com.halliburton.halliburtonsystem.entities.Employee;
+
 public class EmployeeDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -16,11 +18,17 @@ public class EmployeeDTO implements Serializable {
 	}
 
 	public EmployeeDTO(Long id, String name, String role, String company) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.role = role;
 		this.company = company;
+	}
+	
+	public EmployeeDTO(Employee entity) {
+		id = entity.getId();
+		name = entity.getName();
+		role = entity.getRole();
+		company = entity.getCompany();
 	}
 
 	public Long getId() {
@@ -55,7 +63,4 @@ public class EmployeeDTO implements Serializable {
 		this.company = company;
 	}
 	
-	
-	
-
 }
