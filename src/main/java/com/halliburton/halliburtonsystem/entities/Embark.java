@@ -1,7 +1,7 @@
 package com.halliburton.halliburtonsystem.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +19,8 @@ public class Embark implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Instant begin;
-	private Instant end;
+	private LocalDate begin;
+	private LocalDate end;
 	
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
@@ -30,7 +30,7 @@ public class Embark implements Serializable{
 		
 	}
 
-	public Embark(Long id, Instant begin, Instant end, Employee employee) {
+	public Embark(Long id, LocalDate begin, LocalDate end, Employee employee) {
 		super();
 		this.id = id;
 		this.begin = begin;
@@ -46,11 +46,11 @@ public class Embark implements Serializable{
 		this.id = id;
 	}
 
-	public Instant getBegin() {
+	public LocalDate getBegin() {
 		return begin;
 	}
 
-	public void setBegin(Instant begin) {
+	public void setBegin(LocalDate begin) {
 		this.begin = begin;
 	}
 
@@ -62,11 +62,11 @@ public class Embark implements Serializable{
 		this.employee = employee;
 	}
 	
-	public Instant getEnd() {
+	public LocalDate getEnd() {
 		return end;
 	}
 
-	public void setEnd(Instant end) {
+	public void setEnd(LocalDate end) {
 		this.end = end;
 	}
 
@@ -94,7 +94,4 @@ public class Embark implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 }

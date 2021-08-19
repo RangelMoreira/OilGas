@@ -38,5 +38,4 @@ public class EmployeeResource {
 		return ResponseEntity.ok().body(list); 
 	}
 	
-
 }

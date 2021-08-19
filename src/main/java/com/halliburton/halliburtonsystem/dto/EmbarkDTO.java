@@ -1,7 +1,7 @@
 package com.halliburton.halliburtonsystem.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 import com.halliburton.halliburtonsystem.entities.Embark;
 
@@ -9,8 +9,8 @@ public class EmbarkDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	private Instant begin;
-	private Instant end;
+	private LocalDate begin;
+	private LocalDate end;
 	
 	private EmployeeDTO employee;
 	
@@ -18,7 +18,7 @@ public class EmbarkDTO implements Serializable{
 		
 	}
 
-	public EmbarkDTO(Long id, Instant begin, Instant end, EmployeeDTO employee) {
+	public EmbarkDTO(Long id, LocalDate begin, LocalDate end, EmployeeDTO employee) {
 		super();
 		this.id = id;
 		this.begin = begin;
@@ -42,19 +42,19 @@ public class EmbarkDTO implements Serializable{
 		this.id = id;
 	}
 
-	public Instant getBegin() {
+	public LocalDate getBegin() {
 		return begin;
 	}
 
-	public void setBegin(Instant begin) {
+	public void setBegin(LocalDate begin) {
 		this.begin = begin;
 	}
 
-	public Instant getEnd() {
+	public LocalDate getEnd() {
 		return end;
 	}
 
-	public void setEnd(Instant end) {
+	public void setEnd(LocalDate end) {
 		this.end = end;
 	}
 
