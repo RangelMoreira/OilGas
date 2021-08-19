@@ -23,11 +23,16 @@ public class EmbarkService {
 	@Transactional()
 	public EmbarkDTO insert(EmbarkDTO dto) throws Exception {
 
-//		if (dto.getEnd().isAfter(dto.getBegin().plus(14, ChronoUnit.DAYS))) {
-//			throw new Exception("Não é possível ficar mais de 14 dias embarcado");
-//		}
-//		System.out.println(dto.getBegin().plus(1, ChronoUnit.DAYS));
-
+		if (dto.getEnd().isAfter(dto.getBegin().plusDays(14))) {
+			throw new Exception("Não é possível ficar mais de 14 dias embarcado");
+		}
+		
+		Embark lastEmbark = repository.findLastEmbark(dto.getEmployee().getId());
+		
+		if (dto.getBegin().isBefore(lastEmbark.getEnd().plusDays(7))) {
+			throw new Exception("É necessário ao menos 7 dias de folga para o próximo embarque");
+		}
+		
 		Embark entity = new Embark();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
@@ -36,12 +41,13 @@ public class EmbarkService {
 
 	@Transactional(readOnly = true)
 	public Page<EmbarkDTO> find(String begin, String end, PageRequest pageRequest) {
-
-		Page<Embark> page = repository.find(convertDate(begin), convertDate(end), pageRequest);
-		
-		// Page<Embark> page = repository.findAll(pageRequest);
-
-		return page.map(x -> new EmbarkDTO(x));
+		if (begin.isEmpty() || end.isEmpty()) {
+			Page<Embark> page = repository.findAll(pageRequest);
+			return page.map(x -> new EmbarkDTO(x));
+		} else {
+			Page<Embark> page = repository.find(convertDate(begin), convertDate(end), pageRequest);
+			return page.map(x -> new EmbarkDTO(x));
+		}
 
 	}
 
@@ -60,7 +66,6 @@ public class EmbarkService {
 		LocalDate date = LocalDate.of(Integer.parseInt(dabaseDate[2]), Integer.parseInt(dabaseDate[1]),
 				Integer.parseInt(dabaseDate[0]));
 
-		System.out.println(date);
 		return date;
 	}
 
