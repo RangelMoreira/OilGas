@@ -24,13 +24,13 @@ public class EmbarkService {
 	public EmbarkDTO insert(EmbarkDTO dto) throws Exception {
 
 		if (dto.getEnd().isAfter(dto.getBegin().plusDays(14))) {
-			throw new BusinessException("Não é possível ficar mais de 14 dias embarcado");
+			throw new BusinessException("It is not possible to stay on board for more than 14 days");
 		}
 		
 		Embark lastEmbark = repository.findLastEmbark(dto.getEmployee().getId());
 		
 		if (dto.getBegin().isBefore(lastEmbark.getEnd().plusDays(7))) {
-			throw new Exception("É necessário ao menos 7 dias de folga para o próximo embarque");
+			throw new BusinessException("At least 7 days off is required for the next shipment");
 		}
 		
 		Embark entity = new Embark();
