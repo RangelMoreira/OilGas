@@ -1,7 +1,6 @@
 package com.halliburton.halliburtonsystem.services;
 
 import java.time.LocalDate;
-//import java.time.temporal.ChronoUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +12,7 @@ import com.halliburton.halliburtonsystem.dto.EmbarkDTO;
 import com.halliburton.halliburtonsystem.entities.Embark;
 import com.halliburton.halliburtonsystem.entities.Employee;
 import com.halliburton.halliburtonsystem.repositories.EmbarkRepository;
+import com.halliburton.halliburtonsystem.services.exceptions.BusinessException;
 
 @Service
 public class EmbarkService {
@@ -24,7 +24,7 @@ public class EmbarkService {
 	public EmbarkDTO insert(EmbarkDTO dto) throws Exception {
 
 		if (dto.getEnd().isAfter(dto.getBegin().plusDays(14))) {
-			throw new Exception("Não é possível ficar mais de 14 dias embarcado");
+			throw new BusinessException("Não é possível ficar mais de 14 dias embarcado");
 		}
 		
 		Embark lastEmbark = repository.findLastEmbark(dto.getEmployee().getId());
