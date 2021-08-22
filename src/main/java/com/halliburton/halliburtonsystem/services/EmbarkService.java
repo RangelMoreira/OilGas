@@ -61,10 +61,10 @@ public class EmbarkService {
 
 	public LocalDate convertDate(String stringDate) {
 
-		String[] dabaseDate = stringDate.split("/");
+		String[] dabaseDate = stringDate.split("-");
 
-		LocalDate date = LocalDate.of(Integer.parseInt(dabaseDate[2]), Integer.parseInt(dabaseDate[1]),
-				Integer.parseInt(dabaseDate[0]));
+		LocalDate date = LocalDate.of(Integer.parseInt(dabaseDate[0]), Integer.parseInt(dabaseDate[1]),
+				Integer.parseInt(dabaseDate[2]));
 
 		return date;
 	}
